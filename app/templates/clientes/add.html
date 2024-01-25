@@ -6,6 +6,13 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <h1>Agregar clientes</h1>
+    <form action="{{ url_for(' cliente.add') }}" method="post">
+        <label for="idClientes">idClientes:</label>
+        <input type="text" id="nombre" name="nombre" required>
+        <label for="nacionalidad">Nacionalidad:</label>
+        <input type="text" id="nacionalidad" name="nacionalidad" required>
+        <button type="submit">Agregar Author</button>
+    </form>
 </body>
 </html>

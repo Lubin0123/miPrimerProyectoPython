@@ -6,6 +6,30 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <h1>Lista de clientes</h1>
+    <table>
+        <tr>
+            <th>idClientes</th>
+            <th>nombreClientes</th>
+            <th>cedulaClientes</th>
+            <th>correoClientes</th>
+        </tr>
+        {% for clientes in data %}
+            <tr>
+                <td>{{ clientes.idClientes }}</td>
+                <td>{{ clientes.nombreClientes }}</td>
+                <td>{{ clientes.cedulaClientes }}</td>
+                <td>{{ clientes.correoClientes }}</td>
+                <td>
+                    <a href="{{ url_for('clientes.edit', idClientes=clientes.idClientes) }}">Editar</a>
+                    <a href="{{ url_for('clientes.delete', idClientes=book.idClientes) }}">Eliminar</a>                 
+                    <!-- Agrega aquí el enlace para eliminar -->
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    <a href="{{ url_for('clientes.add') }}">Agregar clientes</a>
+    <br>
+    <a href="{{ url_for('productos.index') }}">Ir a productos</a> 
 </body>
 </html>

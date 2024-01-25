@@ -1,2 +1,2 @@
-from app.models.clientes import clientes
-from app.models.productos import productos
+from app.models.Cliente import clientes
+from app.models.Producto import productos
