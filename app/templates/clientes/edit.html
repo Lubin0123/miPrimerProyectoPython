@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/clientesEdit.css')}}">
+    <title>Editar Libro</title>
+</head>
+<body>
+    <div>
+        <h1>Editar clientes</h1>
+        <form action="{{ url_for('clientes.edit', idClientes=clientes.idClientes) }}" method="post">
+            <label for="nombreClientes">nombre Clientes:</label>
+            <input type="text" id="nombreClientes" name="nombreClientes" value="{{ clientes.nombreClientes }}" required>
+            <label for="cedulaClientes">cedula Clientes:</label>
+            <input type="text" id="cedulaClientes" name="cedulaClientes" value="{{ clientes.cedulaClientes}}" required>
+            <label for="correoClientes">correo Clientes:</label>
+            <input type="email" id="correoClientes" name="correoClientes" value="{{ clientes.correoClientes }}" required>
+            <button type="submit">Actualizar clientes</button>
+        </form>
+    </div>
+</body>
+</html>
