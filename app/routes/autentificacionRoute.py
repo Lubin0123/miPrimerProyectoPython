@@ -7,7 +7,7 @@ from flask_bcrypt import Bcrypt
 from app.models.Clientes import Clientes
 from app import db
 
-bp = Blueprint('autentificaionBp', __name__)
+bp = Blueprint('autentificacionBp', __name__)
 
 @bp.route('/', methods=['GET', 'POST'])
 def login():
@@ -23,47 +23,35 @@ def login():
             if bcrypt.check_password_hash (clientePasswordBd, password):
                 login_user(cliente)
                 flash("Login successful!", "success")
-                return redirect(url_for('autenticaciónBp.dashboard'))
+                return redirect(url_for('autentificacion.dashboard'))
             
         flash("Invalid credentials. Please try again.", "error")
 
     
     if current_user.is_authenticated:
-        return redirect(url_for('autenticaciónBp.dashboard'))
+        return redirect(url_for('autentificacion.dashboard'))
     return render_template("autentificacion/login.html")
 
-@bp.route('/crearCuenta')
-def crearCuentas():
-    if current_user.is_authenticated:
-        return redirect(url_for ('autentificaciónBp.index')) 
-    return render_template('crearCuenta.html')
+@bp.route('/registro', methods=['GET', 'POST'])
+def registro():
+    if request.method == 'POST':
+        nombreclientes = request.form['nombreClientes']
+        password = request.form['password']
 
+        # Verificar si el usuario ya existe
+        if Clientes.query.filter_by(nombreClientes=nombreclientes).first():
+            flash("El usuario ya existe. Por favor, elige otro nombre de usuario.", "error")
+        else:
+            # Crear una nueva cuenta
+            hashed_password = Bcrypt.generate_password_hash(password).decode('utf-8')
+            nuevo_cliente = Clientes(nombreClientes=nombreclientes, password=hashed_password)
+            db.session.add(nuevo_cliente)
+            db.session.commit()
+            flash("Cuenta creada con éxito. Ahora puedes iniciar sesión.", "success")
+            return redirect(url_for('autentificacion.login'))
 
-class RegistrationForm(FlaskForm):
-    nombreclientes = StringField('Nombre de Usuario', validators=[validators.DataRequired()])
-    password = PasswordField('Contraseña', validators=[
-        validators.DataRequired(),
-        validators.Length(min=6, message='La contraseña debe tener al menos 6 caracteres'),
-        validators.EqualTo('confirm_password', message='Las contraseñas deben coincidir')
-    ])
-    confirm_password = PasswordField('Confirmar Contraseña')
-    submit = SubmitField('Registrarse')
-
-@bp.route('/Registro', methods=['GET', 'POST'])
-def registrar():
-    form = RegistrationForm()
-
-    if form.validate_on_submit():
-        idClientes = form.user_name.data   
-        nombreclientes = form.user.data
-    return redirect(url_for('inicio'))
-
-    return render_template('registro.html', form=form)
-
+    return render_template("autentificacion/registro.html")
          
-   
-
-
 @bp.route('/dashboard')
 @login_required
 def dashboard():
@@ -75,4 +63,4 @@ def dashboard():
 def logout():
     logout_user()
     flash('You have been logged out.', 'info')
-    return redirect(url_for('autenticación.login'))
+    return redirect(url_for('autentificacion.login'))

@@ -1,6 +1,5 @@
-from  flask_login import UserMixin
+from flask_login import UserMixin
 from app import db
-
 
 class Clientes(db.Model, UserMixin):
     __tablename__ = "cliente"
@@ -9,3 +8,4 @@ class Clientes(db.Model, UserMixin):
     cedulaClientes = db.Column(db.String(255), nullable=False)
     correoClientes = db.Column(db.String(255), nullable=False)
     password = db.Column(db.String(255), nullable=False)
+    facturaVentas = db.relationship('FacturaVentas', backref='miCliente', lazy=True,overlaps="facturaVentas")

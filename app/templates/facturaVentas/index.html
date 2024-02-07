@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,7 +24,7 @@
                 <td>
                     <a href="{{ url_for('clientes.edit', idClientes=cliente.idClientes) }}">Editar</a>
                     <a href="{{ url_for('clientes.delete', idClientes=cliente.idClientes) }}">Eliminar</a>
-                    <!-- Agrega aquí el enlace para eliminar -->
+                    
                 </td>
             </tr>
             {% endfor %}
@@ -35,3 +36,6 @@
     
 </body>
 </html>
+
+
+
