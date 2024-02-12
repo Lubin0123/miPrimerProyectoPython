@@ -8,4 +8,3 @@ class FacturaVentas(db.Model, UserMixin):
     idClientes = db.Column(db.Integer, db.ForeignKey('cliente.idClientes'), nullable=False)
     horaFacturaVenta = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     totalFacturaVenta = db.Column(db.Integer, nullable=False)
-    cliente = db.relationship('Clientes', backref='facturasVentas', lazy=True, overlaps="miCliente")

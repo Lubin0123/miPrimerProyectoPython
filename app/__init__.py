@@ -35,7 +35,7 @@ def create_app():
          # Utilizar el ID del usuario para buscar y cargar el usuario desde la base de datos
         return Clientes.query.get(int(user_id))
     
-    # Importar las rutas desde los módulos y registrarlas en la aplicación
+    # Importar las rutas desde los módelos y registrarlas en la aplicación
     from app.routes import clienteRoute, productoRoute, autentificacionRoute, facturaVentasRoute
     app.register_blueprint(clienteRoute.bp)
     app.register_blueprint(productoRoute.bp)

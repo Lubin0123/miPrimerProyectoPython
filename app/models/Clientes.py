@@ -8,4 +8,4 @@ class Clientes(db.Model, UserMixin):
     cedulaClientes = db.Column(db.String(255), nullable=False)
     correoClientes = db.Column(db.String(255), nullable=False)
     password = db.Column(db.String(255), nullable=False)
-    facturaVentas = db.relationship('FacturaVentas', backref='miCliente', lazy=True,overlaps="facturaVentas")
+    facturas = db.relationship('FacturaVentas', backref='cliente', lazy=True)
