@@ -1,0 +1,83 @@
+
+body {
+    background-color: #f8f9fa;
+    color: #343a40;
+    font-family: 'Arial', sans-serif;
+}
+.parrafo{
+display: flex;
+flex-direction: column;
+margin-top: 10px; /* Margen superior para colocar debajo del formulario */ color: #111417; /* Color de texto, ajusta según tu diseño */
+}
+
+.container {
+    margin-top: 20px; /* Ajustar el margen superior según sea necesario */
+    display: flex;
+    flex-direction: column; /* Establecer la dirección de los elementos a columna */
+    align-items: center; /* Centrar los elementos horizontalmente */
+
+    
+}
+
+form {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #000000; /* Color negro para los labels */
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #000000; /* Borde negro */
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.1); /* Fondo negro con transparencia */
+    color: #000000;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff; /* Color azul para el botón */
+    border: none;
+    border-radius: 5px;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+a {
+    color: #007bff; /* Color azul para el enlace */
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+p {
+    color: #000000;
+    margin-top: 15px;
+}
+
+/* Estilos adicionales para el enlace dentro del párrafo */
+p a {
+    color: #007bff;
+}
+
+p a:hover {
+    text-decoration: underline;
+}
+.title {
+    border: 2px solid #007bff; /* Borde de color azul */
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+}

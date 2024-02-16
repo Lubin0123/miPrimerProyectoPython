@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estiloCarrito.css')}}">
+
+    <title>Carrito de Compras</title>
+    
+</head>
+
+<body>
+
+    <h1>Carrito de Compras</h1>
+    {% for producto in carritoVentas %}
+    
+    
+    <form action="/agregar/{{ producto.idProductos }}" method="post" class="card">
+        <div class="contenedorImagen">
+            <img src="{{ url_for('static', filename='imagenes/' ~ producto['producto'].nombreImagen) }}">
+        </div>
+        <div class="card-title">{{ producto['producto'].descripcionProductos  }}</div>
+        <div class="card-description">{{ producto['producto'].informacionProductos  }}</div>
+        <div class="card-price">{{ producto['producto'].precioProductos  }}</div>
+        <div class="subtotal">precio:{{  producto['producto'].precioProductos }}</div>
+    </form>
+    {% endfor %}
+    
+    </div>
+
+    <!-- Agrega más tarjetas según sea necesario -->
+
+    <p class="total">subTotal:{{subTotal}}</p>
+
+    <a  class="boton-comprar"href="{{ url_for('facturaVentas.index') }}">Generar Factura</a>
+
+
+    
+</body>
+
+</html>

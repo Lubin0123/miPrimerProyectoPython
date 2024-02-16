@@ -1,44 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css')}}">
+
 </head>
+
 <body>
+    <div class="container">
+        <section class="seccion-izquierda">
 
-<div class="container mt-5">
-    <div class="col-md-6 offset-md-3">
+            <div class="col-md-6 offset-md-3">
 
-        <h2>Login</h2>
+                <h1 class="titulo">BiciMotos El Rin</h1>
 
-
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
+                {% with messages = get_flashed_messages(with_categories=true) %}
                 <ul class="flash-messages">
-                    {% for message in messages %}
-                        <li class="flash-message alert alert-{{ message[1] }}">{{ message[0] }}</li>
+                    {% for categoria,message in messages %}
+                    {% if categoria == "error" %}
+                    <h5 style="color: red;">{{ message }}</h5>
+                    {% endif %}
                     {% endfor %}
                 </ul>
-            {% endif %}
-        {% endwith %}
+                {% endwith %}
 
-        <form method="post" action="{{ url_for('autentificacionBp.login') }}">
-            <div class="form-group">
-                <label for="nombreClientes">Nombre Cliente</label>
-                <input type="text" name="nombreClientes" id="nombreClientes" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Contraseña</label>
-                <input type="password" name="password" id="password" class="form-control" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Login</button>
-            <a href="{{ url_for('autentificacionBp.registro') }}">Registrarse</a>
+                <form method="post" action="{{ url_for('autentificacionBp.login') }}">
+                    <div class="form-group">
+                        <label for="nombreClientes">Nombre Cliente</label>
+                        <input type="text" name="nombreClientes" id="nombreClientes" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Contraseña</label>
+                        <input type="password" name="password" id="password" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                    <a href="{{ url_for('autentificacionBp.registro') }}">Registrarse</a>
 
-        </form>
+                </form>
+            </div>
+        </section>
+
+        <section class="seccion-derecha">
+            <img src="{{ url_for('static', filename ='imagenes/login.jpg' ) }}">
+            <img src="{{ url_for('static', filename ='imagenes/2.jpg' ) }}">
+
+        </section>
     </div>
-</div>
 
 </body>
+
 </html>

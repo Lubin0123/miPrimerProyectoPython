@@ -8,4 +8,7 @@ class Clientes(db.Model, UserMixin):
     cedulaClientes = db.Column(db.String(255), nullable=False)
     correoClientes = db.Column(db.String(255), nullable=False)
     password = db.Column(db.String(255), nullable=False)
-    facturas = db.relationship('FacturaVentas', backref='cliente', lazy=True)
+    facturas = db.relationship('FacturaVentas')
+
+    def get_id(self):
+        return str(self.idClientes)

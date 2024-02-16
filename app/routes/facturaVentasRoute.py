@@ -1,50 +1,43 @@
 from flask import Blueprint, render_template, request, redirect, url_for
 from app.models.FacturaVentas import FacturaVentas, db
+from datetime import datetime
+from app.routes.carritoVentasRoute import carritoVentas
+from app.models.Clientes import Clientes
+from flask_login import current_user
+from app.models.DetalleVenta import DetalleVentas
 
 bp = Blueprint('facturaVentas', __name__)
 
 @bp.route('/facturaVenta')
 def index():
-    data = FacturaVentas.query.all()
-    return render_template('facturaVentas/index.html', data=data)
+    fechaActual = datetime.now()
+    fechaFormateada = fechaActual.strftime("%Y-%m-%d")
 
-@bp.route('/facturaVenta/add', methods=['GET', 'POST'])
-def add():
-    if request.method == 'POST':       
-        horaFacturaVenta = request.form['horaFacturaVenta']
-        totalFacturaVenta = request.form['totalFacturaVenta']    
-        new_FacturaVentas = FacturaVentas(idClientes=None, horaFacturaVenta=horaFacturaVenta, totalFacturaVenta=totalFacturaVenta )
-        db.session.add(new_FacturaVentas)
-        db.session.commit()
-        
-        return redirect(url_for('facturaVentas.index'))
+    subTotal = 0
+    for carritoP in carritoVentas.getItems():
+        subTotal +=  int(carritoP['producto'].precioProductos)
+        print("subtotal",subTotal)
 
-    return render_template('facturaVentas/add.html')
-
-@bp.route('/facturaVenta/edit/<int:idFacturaVenta>', methods=['GET', 'POST'])
-def edit(idFacturaVenta):
-    facturaVenta = FacturaVentas.query.get_or_404(idFacturaVenta)
-
-    if request.method == 'POST':
-
-        facturaVenta.horaFacturaVenta = request.form['horaFacturaVenta']
-        facturaVenta.totalFacturaVenta = request.form['totalFacturaVenta']
-        db.session.commit()
-        return redirect(url_for('facturaVentas.index'))
-
-    return render_template('facturaVentas/edit.html', facturaVenta=facturaVenta)
-
-
-@bp.route('/facturaVenta/delete/<int:idFacturaVenta>')
-def delete(idFacturaVenta):
-    facturaVenta = FacturaVentas .query.get_or_404(idFacturaVenta)
+    iva = subTotal * 0.19
+    subTotalFinal = iva + subTotal
     
-    db.session.delete(facturaVenta)
+    horaActual = datetime.now()
+    formatoHora = horaActual.strftime("%H:%M:%S")
+    print(formatoHora)
+
+    new_FacturaVenta = FacturaVentas(idFacturaVentas=None, idClientes=current_user.idClientes, horaFacturaVentas=horaActual, totalFacturaVentas=subTotalFinal)
+    db.session.add(new_FacturaVenta)
     db.session.commit()
 
-    return redirect(url_for('facturaVentas.index'))
+    for carrito in carritoVentas.getItems():
+        idProductos = carrito["producto"].idProductos        
+        detallefactura = DetalleVentas(idDetalleVenta=None,cantidadDetalleVenta=1,idFactura=new_FacturaVenta.idFacturaVentas,idClientes=current_user.idClientes, idProductos=idProductos)
+        db.session.add(detallefactura)
+        db.session.commit() 
+    carritoVentas.vaciarcarrito()
+    
+    Detalles =DetalleVentas.query.filter_by(idFactura=new_FacturaVenta.idFacturaVentas).all()
 
-#@bp.route('/totalFactura')
-#def totalFactura(totalFacturaVenta):
-    #total = calcularTotalFactura(totalFacturaVenta)
-    #return 'Total de facturas: {totalFactura}'
+
+    return render_template('facturaVentas/vistaFactura.html', fecha=fechaFormateada, hora=formatoHora, subTotalFinal=subTotalFinal,DetalleVentas=Detalles, iva=iva)
+

@@ -2,6 +2,7 @@ import bcrypt
 from flask import Blueprint, render_template, redirect, url_for, request, flash
 from flask_login import login_user, logout_user, login_required, current_user
 from flask_wtf import FlaskForm
+from werkzeug.security import check_password_hash
 from wtforms import SubmitField
 from wtforms import StringField, PasswordField ,validators
 from flask_bcrypt import Bcrypt
@@ -12,33 +13,30 @@ bp = Blueprint('autentificacionBp', __name__)
 
 from flask import redirect, url_for, flash
 bcrypt = Bcrypt()
-@bp.route('/', methods=['GET', 'POST'])
+
+@bp.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        
         nombreclientes = request.form['nombreClientes']
         password = request.form['password']
         
         cliente = Clientes.query.filter_by(nombreClientes=nombreclientes).first()
         
-        if cliente and bcrypt.check_password_hash(clientePasswordBd, password):
-
+        if cliente:
             clientePasswordBd = cliente.password
-            login_user(cliente)
-            flash("Login successful!", "success")
-                #return redirect(url_for('autentificacionBp.dashboard'))
-            return render_template('autentificacion/index.html')
-            
-        flash("Invalid credentials. Please try again.", "error")
+            if bcrypt.check_password_hash(clientePasswordBd, password):
+                login_user(cliente)
+                flash("Login successful!", "success")
+                return redirect(url_for('carritos.vistaProductos'))
+            else:
+                flash("Invalid password. Please try again.", "error")
+        else:
+            flash("User not found. Please try again.", "error")
 
     if current_user.is_authenticated:
-       # return redirect(url_for('autentificacionBp.dashboard'))
         return render_template('clientes/index.html')
     else:
-        flash("No hay clientes registrados. Por favor, regístrate antes de iniciar sesión.", "info")
-        return redirect(url_for('autentificacionBp.registro'))
-
-
+        return render_template('autentificacion/login.html')
 
 @bp.route('/registro', methods=['GET', 'POST'])
 def registro():
@@ -86,4 +84,4 @@ def dashboard():
 def logout():
     logout_user()
     flash('You have been logged out.', 'info')
-    return redirect(url_for('autentificacion.login'))
+    return redirect(url_for('carritos.vistaProductos'))

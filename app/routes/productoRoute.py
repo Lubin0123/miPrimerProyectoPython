@@ -5,7 +5,7 @@ from app.models.Clientes import Clientes, db
 
 bp = Blueprint('productos', __name__)
 
-@bp.route('/productos')
+@bp.route('/productos'  , methods=['GET', 'POST'])
 def index():
     data = Productos.query.all()
     return render_template('productos/index.html', data=data)
