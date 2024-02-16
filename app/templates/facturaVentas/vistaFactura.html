@@ -38,29 +38,29 @@
                 </tr>
             </thead>
             <tbody>
-                {% for detalleVenta in data %} 
+                {% for DetalleVentas in data %} 
 
                 <tr>
-                    <td scope="row">{{detalleVenta.idProducto }}</td>
-                    <td>{{current_user.descripcionProductos}}</td>
-                    <td>{{current_user.precioProductos }}</td>
+                    <td scope="row">{{ DetalleVentas.idProductos }}</td>
+                    <td>{{ DetalleVentas.descripcionProductos }}</td>
+                    <td>{{ DetalleVentas.precioProductos }}</td>
                 </tr>
                 {% endfor %}
                 <tr>
                     <td></td>
                     <th>subTotal:</th>
-                    <th>${unCarritoF.getTotal()}</th>
+                    <th>{{ subTotal}}</th>
                 </tr>
 
                 <tr>
                     <td></td>
                     <th>Iva-19%:</th>
-                    <th>${unFacturaVenta.calcularIva( unCarritoF.getTotal()) }</th>
+                    <th>{{ iva }}</th>
                 </tr>
                 <tr>
                     <td></td>
                     <th>Total:</th>
-                    <th>${unFacturaVenta.totalFinal()}</th>
+                    <th>{{ total }}</th>
                 </tr>
             </tbody>
 
