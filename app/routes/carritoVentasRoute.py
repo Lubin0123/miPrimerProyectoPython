@@ -53,8 +53,8 @@ def tCarrito():
     a = carritoVentas.tamanoD()
     return a
 
-@bp.route('/eliminar/<int:id>', methods=['POST'])
+@bp.route('/eliminar/<int:idProductos>', methods=['GET'])
 def eliminarDelCarrito(idProductos):
     carritoVentas.eliminarProducto(idProductos)
-    return redirect(url_for('carrito.listar'))
+    return render_template('carrito/carritoVentas.html')
     #return "Entra a eliminar del carrito"

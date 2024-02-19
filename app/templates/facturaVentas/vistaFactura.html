@@ -38,12 +38,14 @@
                 </tr>
             </thead>
             <tbody>
-                {% for DetalleVentas in data %} 
+                {% for producto in car %} 
 
                 <tr>
-                    <td scope="row">{{ DetalleVentas.idProductos }}</td>
-                    <td>{{ DetalleVentas.descripcionProductos }}</td>
-                    <td>{{ DetalleVentas.precioProductos }}</td>
+                    <td scope="row">{{ producto['producto'].idProductos  }}</td>
+                    <td scope="row">{{ producto['producto'].descripcionProductos  }}</td>
+                    <td scope="row">{{ producto['producto'].precioProductos  }}</td>
+                    
+                    
                 </tr>
                 {% endfor %}
                 <tr>
@@ -76,6 +78,12 @@
                 Gracias por elegir nuestros productos/servicios. Valoramos tu preferencia y esperamos verte nuevamente
                 pronto; ¡Que tengas un excelente día!.
             </p>
+        </div>
+        
+        <div class="botonLimpiar">
+            <a href="{{(url_for('carritos.eliminarDelCarrito') }}">limpiar Carrito</a>
+
+
         </div>
     </div>
 
