@@ -23,9 +23,6 @@ def index():
  for carritoP in carritoVentas.getItems():
    subTotal +=  int(carritoP['producto'].precioProductos)
    print("subtotal",subTotal)
-  
-
-
  return render_template('carrito/carritoVentas.html',carritoVentas=carritoVentas.getItems(),subTotal=subTotal)
 
 @bp.route('/agregar/<int:idProductos>', methods=['POST'])
@@ -53,8 +50,23 @@ def tCarrito():
     a = carritoVentas.tamanoD()
     return a
 
-@bp.route('/eliminar/<int:idProductos>', methods=['GET'])
+@bp.route('/eliminar/<int:idProductos>', methods=['GET', 'POST'])
 def eliminarDelCarrito(idProductos):
+    global subTotal
+    print(idProductos)
     carritoVentas.eliminarProducto(idProductos)
-    return render_template('carrito/carritoVentas.html')
-    #return "Entra a eliminar del carrito"
+    subTotal = 0  # Inicializa el subtotal antes de recalcularlo
+    for carritoP in carritoVentas.getItems():
+        subTotal += int(carritoP['producto'].precioProductos)
+    print("subtotal", subTotal)
+    return render_template('carrito/carritoVentas.html', idProductos=idProductos, carritoVentas=carritoVentas.getItems(), subTotal=subTotal)
+
+@bp.route('/vaciarCarrito/<int:idProductos>',methods=['GET', 'POST'])
+def vaciarCarrito(idProductos):
+    carritoVaciado = carritoVentas.query.get(idProductos)
+    
+    if carritoVaciado:
+        carritoVaciado.vaciarcarrito()
+        flash('carrito vaciado correctamente', 'success')
+        return render_template('index.html')
+    else: flash('no se encontro el producto en el carrito', 'danger')

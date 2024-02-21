@@ -51,7 +51,7 @@ def index():
 
 
         return render_template('facturaVentas/vistaFactura.html', fecha=fechaFormateada, hora=formatoHora,subTotal=subTotal, total=subTotalFinal,DetalleVentas=Detalles, iva=iva, car=carritoVentas.getItems())
-    return redirect(url_for('carritos.vistaProductos'))
+    return redirect(url_for('carritos.eliminarDelCarrito'))
 
 
     

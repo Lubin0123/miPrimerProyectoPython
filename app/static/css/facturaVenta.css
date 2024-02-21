@@ -45,3 +45,18 @@ a {
 a:hover {
     color: #ffd700; /* Cambiar a amarillo al pasar el ratón sobre el enlace */
 }
+.contenedorProductos{
+    margin-left: 20px;
+
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px solid #dddddd; /* Borde para la tabla */
+}
+
+th, td {
+    border: 1px solid #dddddd; /* Borde para las celdas */
+    padding: 8px; /* Espaciado interno para mejorar la apariencia */
+    text-align: left;
+}

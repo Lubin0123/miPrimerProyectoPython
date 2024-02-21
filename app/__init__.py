@@ -36,13 +36,14 @@ def create_app():
         return Clientes.query.get(int(user_id))
     
     # Importar las rutas desde los módelos y registrarlas en la aplicación
-    from app.routes import clienteRoute, productoRoute, autentificacionRoute, facturaVentasRoute,carritoVentasRoute, detalleVentaRoute
+    from app.routes import clienteRoute, productoRoute, autentificacionRoute, facturaVentasRoute,carritoVentasRoute, detalleVentaRoute,administradorRoute
     app.register_blueprint(clienteRoute.bp)
     app.register_blueprint(productoRoute.bp)
     app.register_blueprint(autentificacionRoute.bp)
     app.register_blueprint(facturaVentasRoute.bp)
     app.register_blueprint(carritoVentasRoute.bp)
     app.register_blueprint(detalleVentaRoute.bp)
+    app.register_blueprint(administradorRoute.bp)
 
     # Retornar la aplicación configurada
     return app

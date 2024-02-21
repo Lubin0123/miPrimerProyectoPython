@@ -21,13 +21,13 @@
             </tr>
             {% for producto in data %}
             <tr>
-                <td>{{ Productos.idProductos }}</td>
-                <td>{{ Productos.descripcionProductos }}</td>
-                <td>{{ Productos.precioProductos }}</td>
-                <td>{{ Productos.cantidadProductos }}</td>
+                <td>{{ producto.idProductos }}</td>
+                <td>{{ producto.descripcionProductos }}</td>
+                <td>{{ producto.precioProductos }}</td>
+                <td>{{ producto.cantidadProductos }}</td>
                 <td>
-                    <a href="{{ url_for('productos.edit', idProductos=Productos.idProductos) }}">Editar</a>
-                    <a href="{{ url_for('productos.delete', idProductos=Productos.idProductos) }}">Eliminar</a>
+                    <a href="{{ url_for('productos.edit', idProductos=producto.idProductos) }}">Editar</a>
+                    <a href="{{ url_for('productos.delete', idProductos=producto.idProductos) }}">Eliminar</a>
                     <!-- Agrega aquí el enlace para eliminar -->
                 </td>
             </tr>

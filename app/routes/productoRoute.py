@@ -17,8 +17,9 @@ def add():
         descripcionProductos = request.form['descripcionProductos']
         precioProductos = request.form['precioProductos']
         cantidadProductos = request.form['cantidadProductos']
+        nombreImagen = request.form['nombreImagen']
         
-        new_Producto = Productos(descripcionProductos=descripcionProductos, precioProductos=precioProductos, cantidadProductos=cantidadProductos)
+        new_Producto = Productos(descripcionProductos=descripcionProductos, precioProductos=precioProductos, cantidadProductos=cantidadProductos, nombreImagen=nombreImagen)
         db.session.add(new_Producto)
         db.session.commit()
         

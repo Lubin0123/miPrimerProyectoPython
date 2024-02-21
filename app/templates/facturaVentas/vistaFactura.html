@@ -5,69 +5,61 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/facturaVenta.css')}}">
-
     <title>Document</title>
 </head>
 
 <body>
     <div class="contenedorFactura">
         <div class="header">
-            <img src="{{ url_for('static', filename='imagenes/logo.jpg') }}"
-                alt="logo">
-
+            <img src="{{ url_for('static', filename='imagenes/logo.jpg') }}" alt="logo">
             <h1>Factura de Venta</h1>
         </div>
 
         <div class="informacionCliente">
             <p><strong>Cliente:</strong> {{current_user.nombreClientes}}</p>
             <p><strong>Cedula:</strong> {{current_user.cedulaClientes}}</p>
-            <p> <strong>Fecha:</strong> {{ fecha}} </p>
-
+            <p><strong>Fecha:</strong> {{ fecha}}</p>
         </div>
+
         <h2>Productos:</h2>
+        <div class="contenedorProductos">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">idProductos</th>
+                        <th scope="col">Descripcion Productos</th>
+                        <th scope="col">Precio Productos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for producto in car %}
+                        <tr>
+                            <td scope="row">{{ producto['producto'].idProductos }}</td>
+                            <td scope="row">{{ producto['producto'].descripcionProductos }}</td>
+                            <td scope="row">{{ producto['producto'].precioProductos }}</td>
+                        </tr>
+                    {% endfor %}
 
-        <table class="table table-bordered">
+                    <tr>
+                        <td></td>
+                        <th>subTotal:</th>
+                        <th>{{ subTotal }}</th>
+                    </tr>
 
-            <thead>
-                <tr>
-            
-                    <th scope="col">idProductos</th>
-                    <th scope="col">Descripcion Productos</th>
-                    <th scope="col">Precio Productos</th>
+                    <tr>
+                        <td></td>
+                        <th>Iva-19%:</th>
+                        <th>{{ iva }}</th>
+                    </tr>
 
-                </tr>
-            </thead>
-            <tbody>
-                {% for producto in car %} 
-
-                <tr>
-                    <td scope="row">{{ producto['producto'].idProductos  }}</td>
-                    <td scope="row">{{ producto['producto'].descripcionProductos  }}</td>
-                    <td scope="row">{{ producto['producto'].precioProductos  }}</td>
-                    
-                    
-                </tr>
-                {% endfor %}
-                <tr>
-                    <td></td>
-                    <th>subTotal:</th>
-                    <th>{{ subTotal}}</th>
-                </tr>
-
-                <tr>
-                    <td></td>
-                    <th>Iva-19%:</th>
-                    <th>{{ iva }}</th>
-                </tr>
-                <tr>
-                    <td></td>
-                    <th>Total:</th>
-                    <th>{{ total }}</th>
-                </tr>
-            </tbody>
-
-        </table>
-
+                    <tr>
+                        <td></td>
+                        <th>Total:</th>
+                        <th>{{ total }}</th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
         <a href="ControladorIniciarSesion">
             <span>MENU</span>
@@ -79,16 +71,10 @@
                 pronto; ¡Que tengas un excelente día!.
             </p>
         </div>
-        
-        <div class="botonLimpiar">
-            <a href="{{(url_for('carritos.eliminarDelCarrito') }}">limpiar Carrito</a>
-
-
-        </div>
     </div>
-
 </body>
 <script>
-    
+
 </script>
+
 </html>

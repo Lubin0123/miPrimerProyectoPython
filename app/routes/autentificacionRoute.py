@@ -14,6 +14,7 @@ bp = Blueprint('autentificacionBp', __name__)
 from flask import redirect, url_for, flash
 bcrypt = Bcrypt()
 
+
 @bp.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -27,7 +28,12 @@ def login():
             if bcrypt.check_password_hash(clientePasswordBd, password):
                 login_user(cliente)
                 flash("Login successful!", "success")
-                return redirect(url_for('carritos.vistaProductos'))
+                
+                  # Verifica el rol y redirige según el rol
+                if cliente.rol == 'administrador':
+                    return redirect(url_for('autentificacionBp.dashboard'))
+                else:
+                    return redirect(url_for('carritos.vistaProductos'))
             else:
                 flash("Invalid password. Please try again.", "error")
         else:
@@ -59,7 +65,9 @@ def registro():
             nombreClientes=nombreclientes,
             cedulaClientes=cedulaclientes,
             correoClientes=correoclientes,
-            password=hashed_password
+            password=hashed_password,
+            rol='usuario'  # Establece el rol por defecto al registrar un nuevo cliente
+
         )
 
         # Agregar el nuevo cliente a la base de datos
@@ -73,11 +81,17 @@ def registro():
     return render_template("autentificacion/registro.html")
 
          
+
 @bp.route('/dashboard')
 @login_required
 def dashboard():
-    user_name = current_user.nombreclientes
-    return f'Welcome, {user_name}! This is your dashboard.'
+    data = Clientes.query.all()
+
+    if current_user.rol == 'administrador':
+        return render_template('administrador/dashboard.html', data=data)  
+    else:
+        user_name = current_user.nombreclientes
+        return f'Welcome, {user_name}! This is your dashboard.'
 
 @bp.route('/logout')
 @login_required

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administrador</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estiloDashboard.css')}}">
+
+</head>
+
+<body>
+
+    
+    <section class="seccion1">
+        <div class="titulo">
+
+            <h1>Bienvenido al Panel de Administrador, {{ current_user.nombreClientes }}</h1>
+            <div class="logo">
+                <img src="{{ url_for('static', filename='imagenes/login.jpg') }}" alt="" style="height: 700px; width: 500px;">
+            </div>
+            <a href="{{ url_for('productos.add') }}">Agregar Productos</a>
+
+                
+        </div>
+    </section>
+    
+    
+    <section class="seccion2">
+        <div class="container">
+            <div class="box">
+                <h2>CLIENTES</h2>
+                <img src="{{ url_for('static', filename='imagenes/cliente.avif') }}" alt="Descripción de la imagen">
+                <p>Clientes Registrados</p>
+                <a href="{{ url_for('clientes.index') }}">ver Clientes</a>
+            </div>
+
+            <div class="box">
+                <h2>PRODUCTOS</h2>
+                <img src="{{ url_for('static', filename='imagenes/producto.jpeg') }}" alt="Descripción de la imagen">
+                <p>Productos disponibles</p>
+                <a href="{{ url_for('productos.index') }}">ver Productos</a>
+            </div>
+            
+            <!-- Agrega más elementos según sea necesario -->
+        </div>
+    <section>
+
+</body>
+
+</html>

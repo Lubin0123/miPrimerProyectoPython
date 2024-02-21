@@ -22,3 +22,18 @@ class CarritoVentas:
     
     def vaciarcarrito(self):
         self.carrito = []
+        
+    def eliminarProducto(self, idProductos):
+     # Buscar el índice del producto con el id dado en el carrito
+        indexProducto = next((index for index, item in enumerate(self.carrito) if item['producto'].idProductos == idProductos), None)
+
+        if indexProducto is not None:
+        # Eliminar el producto del carrito usando el índice encontrado
+         productoEliminado = self.carrito.pop(indexProducto)
+         print(f"El producto con id {idProductos} ({productoEliminado['producto'].descripcionProductos}) ha sido eliminado del carrito.")
+        else:
+         print(f"El producto con id {idProductos} no está en el carrito.")
+         
+         
+    def calcularTotal(self):
+      return sum(item['producto'].precioProductos * item['cantidad'] for item in self.carrito)

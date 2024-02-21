@@ -9,6 +9,8 @@ class Clientes(db.Model, UserMixin):
     correoClientes = db.Column(db.String(255), nullable=False)
     password = db.Column(db.String(255), nullable=False)
     facturas = db.relationship('FacturaVentas')
+    rol = db.Column(db.String(20), default='usuario')
+
 
     def get_id(self):
         return str(self.idClientes)
