@@ -24,7 +24,7 @@ def create_app():
 
     # Inicializar la instancia de LoginManager ('login_manager') con la aplicación Flask
     login_manager.init_app(app)
-    login_manager.login_view = 'autentificacionBp.login'
+    login_manager.login_view = 'autentificacion.login'
 
     # Definir una función para cargar usuarios durante la autenticación
     @login_manager.user_loader

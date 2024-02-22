@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1> bienvenido a facturaVenta</h1>
+    
+        <table>
+            <tr>
+                <th>idFactutaVenta</th>
+                <th>horaFacturaVenta</th>
+                <th>totalFacturaVenta</th>
+            
+            </tr>
+            {% for FacturaVentas in data %}
+            <tr>
+                <td>{{ FacturaVentas.idFacturaVenta }}</td>
+                <td>{{ FacturaVentas.horaFacturaVenta }}</td>
+                <td>{{ FacturaVentas.totalFacturaVentas }}</td>
+                <td>
+                    <a href="{{ url_for('clientes.edit', idClientes=cliente.idClientes) }}">Editar</a>
+                    <a href="{{ url_for('clientes.delete', idClientes=cliente.idClientes) }}">Eliminar</a>
+                    
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <a href="{{ url_for('clientes.add') }}">Agregar clientes</a>
+        <br>
+        <a href="{{ url_for('productos.index') }}">Ir a productos</a>
+    </div>
+    
+</body>
+</html>
+
+
+

@@ -1,0 +1,96 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+body {
+    background-color: #fff; /* Fondo blanco */
+    color: #000; /* Texto negro */
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.container {
+    display: flex; /* Utilizamos flexbox para el diseño flexible */
+}
+
+.seccion-izquierda{
+    flex: 2; /* Cada sección tomará el 50% del ancho del contenedor */
+      padding: 150px; /* Añadimos espacio interno para mejorar la apariencia */
+      height: 100%;
+      
+}
+
+.seccion-derecha {
+    flex: 1; /* La sección derecha toma la mitad del ancho de la izquierda */
+    padding: 10px; /* Añadimos espacio interno para mejorar la apariencia */
+    height: 100%;
+    margin-top: 50px;
+  }
+
+/* Estilos para el formulario y la imagen dentro de las secciones */
+.col-md-6 {
+    width: 100%; /* Asegúrate de que el formulario ocupe el 100% del ancho en la sección izquierda */
+  }
+  
+  img {
+    max-width: 100%; /* Asegúrate de que la imagen se ajuste al ancho de la sección derecha */
+    height: 220px; /* Hace que la altura de la imagen se ajuste automáticamente para mantener la proporción */
+  }
+  .titulo {
+    margin: 0; /* Elimina el margen predeterminado del título */
+    white-space: nowrap; /* Evita que el título se divida en varias líneas */
+    text-overflow: ellipsis; /* Muestra puntos suspensivos (...) si el título se desborda */
+}
+
+h1{
+    color: #000; /* Color del título negro */
+    width: 100%; /* O ajusta el ancho según tus necesidades */
+    text-align: center; /* Para centrar el título dentro del contenedor */
+}
+
+.form-group label {
+    color: #000; /* Color del texto de la etiqueta negro */
+}
+
+.form-control {
+    width: 100%; /* O ajusta el valor según tus necesidades */
+    background-color: #e6e6e6; /* Fondo gris claro del campo de entrada */
+    color: #000; /* Texto negro del campo de entrada */
+    border: 1px solid #ccc; /* Borde gris claro del campo de entrada */
+    padding: 8px; /* Espaciado interno para mejorar la apariencia */
+    box-sizing: border-box; /* Incluye el relleno y el borde en el ancho total */
+}
+
+
+.btn-primary {
+    background-color: #007bff; /* Fondo azul del botón primario */
+    border: none;
+    color: #fff; /* Texto blanco del botón primario */
+    transition: background-color 0.3s ease; /* Transición de color en 0.3 segundos */
+}
+
+.btn-primary:hover {
+    background-color: #fff; /* Cambio a fondo blanco al pasar el ratón */
+    color: #007bff; /* Cambio a texto azul al pasar el ratón */
+}
+
+.flash-messages {
+    list-style: none;
+    padding: 0;
+}
+
+.flash-messages h5 {
+    margin-bottom: 10px;
+}
+
+a {
+    color: #007bff; /* Color del enlace azul */
+}
+
+a:hover {
+    color: #000; /* Cambio a texto negro al pasar el ratón */
+}

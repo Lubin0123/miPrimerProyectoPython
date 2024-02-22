@@ -1,0 +1,62 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.contenedorFactura {
+    max-width: 600px;
+    margin: 20px auto;
+    border: 1px solid #ddd;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.header img {
+    max-width: 400px;
+    max-height: 300px;
+}
+
+.header {
+    text-align: center;
+}
+
+
+/* Estilos para el mensaje */
+.mensaje {
+    margin-top: 20px;
+    padding: 15px;
+    border: 5px solid ;
+    border-radius: 10px;
+}
+
+.informacionCliente {
+    margin: 20px 0;
+    display: flex;
+    justify-content: space-between;
+    margin-right: 15px;
+
+}
+a {
+    color: #ffffff; /* Color blanco como color inicial */
+    transition: color 0.3s ease; /* Agregar una transición para suavizar el cambio de color */
+}
+
+a:hover {
+    color: #ffd700; /* Cambiar a amarillo al pasar el ratón sobre el enlace */
+}
+.contenedorProductos{
+    margin-left: 20px;
+
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px solid #dddddd; /* Borde para la tabla */
+}
+
+th, td {
+    border: 1px solid #dddddd; /* Borde para las celdas */
+    padding: 8px; /* Espaciado interno para mejorar la apariencia */
+    text-align: left;
+}
