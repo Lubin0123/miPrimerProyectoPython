@@ -1,6 +1,3 @@
-class Config:    
- SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:@127.0.0.1:3306/tiendaProyecto'
-
-
-    #'mysql+pymysql://root:a5AHF46g4ACgafh-DFG-bdd4f46C2Dfc@monorail.proxy.rlwy.net:15624/tiendaProyecto'#
- SQLALCHEMY_TRACK_MODIFICATIONS = False
+class Config:
+    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:HHGDd16cE62aB5BfG6CgCDDB64b4CC6g@roundhouse.proxy.rlwy.net:40202/motos'
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
